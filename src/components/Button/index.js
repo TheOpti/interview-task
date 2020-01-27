@@ -6,6 +6,7 @@ const Button = ({ label, onClickHandler }) => {
     <button 
       onClick={onClickHandler}
       className="button"
+      type="button"
     >
       { label }
     </button>

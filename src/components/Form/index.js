@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import Button from '../Button';
 import Input from '../Input';
+import Select from '../Select';
 import'./styles.css';
+
+
 
 class Form extends PureComponent {
   submitForm = () => {
@@ -17,12 +20,26 @@ class Form extends PureComponent {
         <Input 
           label="Name"
         />
-        <Button 
+        <Input 
+          label="Nickname"
+        />
+        <Input 
+          label="Email"
+        />
+        <Select 
+          label="Field"
+          values={[]}
+        />
+        <Select 
+          label="Position"
+          values={[]}
+        />
+        <Button
           label="Submit"
           onClickHandler={this.submitForm}
         />
       </div>
-    )
+    );
   }
 }
 

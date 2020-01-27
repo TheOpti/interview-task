@@ -1,0 +1,63 @@
+.select {
+  position: relative;
+  margin: 30px 0;
+  width: var(--max-form-elem-width);
+  color: var(--main-dark-gray-color);
+}
+
+.select__select {
+  position: relative;
+  width: 100%;
+	font-family: inherit;
+	padding: 10px 10px 10px 0;
+	font-size: 18px;
+	border-radius: 0;
+	border: none;
+	border-bottom: 1px solid var(--main-dark-gray-color);
+}
+
+.__select-option {
+  height: 34px;
+}
+
+.select__select:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(0,0,0, 0);
+}
+
+.select__select:focus ~ .select__label,
+.select__select:valid ~ .select__label {
+  top: -14px;
+  font-size: 12px;
+  color: var(--main-blue-color);
+}
+
+.select__select:focus ~ .select__hightlight-bar:before {
+  width: 100%;
+}
+
+.select__hightlight-bar {
+  position: relative;
+  display: block;
+}
+
+.select__hightlight-bar:before {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: var(--main-blue-color);
+  transition: 0.3s ease all;
+  left: 0%;
+}
+
+.select__label {
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.3s ease all;
+}
