@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
 const Input = ({ label }) => {
@@ -19,5 +20,9 @@ const Input = ({ label }) => {
     </div>
   );
 }
+
+Input.propTypes = {
+  label: PropTypes.string,
+};
 
 export default Input;

@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
-const Select = ({ label, values }) => {
+const Select = ({ label, values, selectedValue }) => {
   return (
     <div className="select">
-      <select className="select__select" required>
-        <option value="" disabled selected />
+      <select 
+        className="select__select"  
+        value={selectedValue}
+        required
+      >
+        <option value="default" disabled />
         { values.map((value) => (
           <option value={value.value} key={value.value}>
             { value.label }
@@ -19,5 +24,16 @@ const Select = ({ label, values }) => {
     </div>
   );
 }
+
+Select.propTypes = {
+  label: PropTypes.string,
+  values: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ),
+  selectedValue: PropTypes.string,
+};
 
 export default Select;
