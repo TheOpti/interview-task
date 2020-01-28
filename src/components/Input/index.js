@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
 const Input = ({ label, name, handleChange, value = '', error, formSubmitted }) => {
+  const [visited, setVisited] = useState(false);
+
   const updateFormValue = (event) => {
     const { value } = event.target;
     handleChange(name, value);
-  }
+  };
+
+  const onBlurHandler = () => {
+    setVisited(true);
+  };
+
+  const canShowError = visited || formSubmitted;
   
   return (
     <div className="input">
       <input 
         className="input__input"
         onChange={updateFormValue}
+        onBlur={onBlurHandler}
         value={value}
         required
       />
@@ -25,7 +34,7 @@ const Input = ({ label, name, handleChange, value = '', error, formSubmitted }) 
         { label }
       </label>
       <div className="input__error-msg">
-        { formSubmitted && error } 
+        { canShowError && error } 
       </div>
     </div>
   );

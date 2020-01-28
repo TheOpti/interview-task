@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
 const Select = ({ label, values = [], name, handleChange, selectedValue, error, formSubmitted }) => {
+  const [visited, setVisited] = useState(false);
+
   const updateFormValue = (event) => {
     const value = event.target.value;
     handleChange(name, value);
   };
+
+  const onBlurHandler = () => {
+    setVisited(true);
+  };
+
+  const canShowError = visited || formSubmitted;
 
   return (
     <div className="select">
@@ -14,6 +22,7 @@ const Select = ({ label, values = [], name, handleChange, selectedValue, error, 
         className="select__select"  
         value={selectedValue}
         onChange={updateFormValue}
+        onBlur={onBlurHandler}
         disabled={!values.length}
         required
       >
@@ -29,7 +38,7 @@ const Select = ({ label, values = [], name, handleChange, selectedValue, error, 
         { label }
       </label>
       <div className="select__error-msg">
-        { formSubmitted && error } 
+        { canShowError && error } 
       </div>
     </div>
   );
