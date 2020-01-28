@@ -1,9 +1,10 @@
 .form-value-display {
-  margin: 30px;
+  margin: 45px;
+  width: 100%;
+  max-width: var(--max-form-elem-width);
 }
 
 .form-value-display__border {
-  width: 500px;
   height: 1px;
   background-color: lightgray;
 }
