@@ -38,6 +38,8 @@ class Form extends PureComponent {
 
     if (!formData.email) {
       errors.email = 'This field is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'This is not a correct email';
     }
 
     if (!formData.field) {
@@ -58,6 +60,14 @@ class Form extends PureComponent {
 
   submitForm = () => {
     this.setState({ formSubmitted: true });
+    const { formData } = this.state;
+
+    const errors = this.validate(formData);
+    const formCorrect = this.isFormCorrect(errors);
+
+    if (formCorrect) {
+      alert(JSON.stringify(formData, 2, 2));
+    }
   };
 
   render() {
