@@ -2,15 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const Select = ({ label, values, selectedValue }) => {
+const Select = ({ label, values = [], name, handleChange, selectedValue }) => {
+  const updateFormValue = (event) => {
+    const value = event.target.value;
+    handleChange(name, value);
+  };
+
   return (
     <div className="select">
       <select 
         className="select__select"  
         value={selectedValue}
+        onChange={updateFormValue}
+        disabled={!values.length}
         required
       >
-        <option value="default" disabled />
+        <option style={{ display: 'none' }} />
         { values.map((value) => (
           <option value={value.value} key={value.value}>
             { value.label }
@@ -33,6 +40,7 @@ Select.propTypes = {
       label: PropTypes.string,
     }),
   ),
+  handleChange: PropTypes.func,
   selectedValue: PropTypes.string,
 };
 

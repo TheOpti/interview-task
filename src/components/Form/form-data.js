@@ -1,6 +1,16 @@
-
 const fields = [
-
+  {
+    value: 'it',
+    label: 'IT',
+  },
+  {
+    value: 'product',
+    label: 'Product',
+  },
+  {
+    value: 'content',
+    label: 'Content',
+  },
 ];
 
 const positions = {
@@ -46,4 +56,9 @@ const positions = {
       label: 'Senior Copywriter',
     },
   ]
+};
+
+export {
+  fields,
+  positions,
 }

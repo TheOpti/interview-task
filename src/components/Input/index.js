@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const Input = ({ label }) => {
+const Input = ({ label, name, handleChange, value = '' }) => {
+  const updateFormValue = (event) => {
+    const { value } = event.target;
+    handleChange(name, value);
+  }
+  
   return (
     <div className="input">
       <input 
         className="input__input"
+        onChange={updateFormValue}
+        value={value}
         required
       />
       <div 
@@ -23,6 +30,8 @@ const Input = ({ label }) => {
 
 Input.propTypes = {
   label: PropTypes.string,
+  name: PropTypes.string,
+  handleChange: PropTypes.func,
 };
 
 export default Input;
