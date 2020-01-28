@@ -1,0 +1,6 @@
+
+const UPDATE_FORM_DATA = 'UPDATE_FORM_DATA';
+
+export {
+  UPDATE_FORM_DATA,
+}

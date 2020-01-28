@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { updateFormData } from '../../actions';
+
 import Button from '../Button';
 import Input from '../Input';
 import Select from '../Select';
@@ -66,7 +69,8 @@ class Form extends PureComponent {
     const formCorrect = this.isFormCorrect(errors);
 
     if (formCorrect) {
-      alert(JSON.stringify(formData, 2, 2));
+      const { updateFormData } = this.props;
+      updateFormData(formData);
     }
   };
 
@@ -79,6 +83,8 @@ class Form extends PureComponent {
       field,
       position,
     } = formData;
+
+    console.log('this.props: ', this.props);
 
     const positionFields = positions[field] || [];
     const errors = this.validate(formData);
@@ -142,4 +148,10 @@ class Form extends PureComponent {
   }
 }
 
-export default Form;
+const mapStateToProps = (state) => ({
+  formDataFromRedux: state.formData,
+});
+
+const mapDispatchToProps = { updateFormData };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
