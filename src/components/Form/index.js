@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { updateFormData } from '../../actions';
 
 import Button from '../Button';
@@ -69,8 +70,9 @@ class Form extends PureComponent {
     const formCorrect = this.isFormCorrect(errors);
 
     if (formCorrect) {
-      const { updateFormData } = this.props;
+      const { updateFormData, history } = this.props;
       updateFormData(formData);
+      history.push('/success');
     }
   };
 
@@ -83,8 +85,6 @@ class Form extends PureComponent {
       field,
       position,
     } = formData;
-
-    console.log('this.props: ', this.props);
 
     const positionFields = positions[field] || [];
     const errors = this.validate(formData);
@@ -148,10 +148,9 @@ class Form extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  formDataFromRedux: state.formData,
-});
-
 const mapDispatchToProps = { updateFormData };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+const componentWithRedux = connect(null, mapDispatchToProps)(Form)
+const componentWithRouter = withRouter(componentWithRedux);
+
+export default componentWithRouter;

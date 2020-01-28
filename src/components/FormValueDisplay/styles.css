@@ -1,5 +1,5 @@
 .form-value-display {
-  margin: 45px;
+  margin: 45px 0;
   width: 100%;
   max-width: var(--max-form-elem-width);
 }

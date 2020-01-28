@@ -1,0 +1,5 @@
+.success {
+  margin: auto;
+  max-width: var(--max-form-elem-width);
+  width: 100%;
+}
