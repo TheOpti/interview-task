@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const Select = ({ label, values = [], name, handleChange, selectedValue }) => {
+const Select = ({ label, values = [], name, handleChange, selectedValue, error, formSubmitted }) => {
   const updateFormValue = (event) => {
     const value = event.target.value;
     handleChange(name, value);
@@ -28,6 +28,9 @@ const Select = ({ label, values = [], name, handleChange, selectedValue }) => {
       <label className="select__label">
         { label }
       </label>
+      <div className="select__error-msg">
+        { formSubmitted && error } 
+      </div>
     </div>
   );
 }
@@ -42,6 +45,8 @@ Select.propTypes = {
   ),
   handleChange: PropTypes.func,
   selectedValue: PropTypes.string,
+  error: PropTypes.string,
+  formSubmitted: PropTypes.bool,
 };
 
 export default Select;

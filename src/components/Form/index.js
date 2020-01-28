@@ -14,7 +14,6 @@ class Form extends PureComponent {
   state = {
     formSubmitted: false,
     formData: {},
-    errors: {},
   };
 
   handleChange = (name, value) => {
@@ -26,8 +25,7 @@ class Form extends PureComponent {
     });
   };
 
-  validate = () => {
-    const { formData } = this.state;
+  validate = (formData) => {
     const errors = {};
 
     if (!formData.name) {
@@ -39,27 +37,31 @@ class Form extends PureComponent {
     }
 
     if (!formData.email) {
-      errors.nickname = 'This field is required';
+      errors.email = 'This field is required';
     }
 
     if (!formData.field) {
-      errors.nickname = 'This field is required';
+      errors.field = 'This field is required';
     }
 
     if (!formData.position) {
-      errors.nickname = 'This field is required';
+      errors.position = 'This field is required';
     }
 
-    this.setState({ errors });
+    return errors;
+  }
+
+  isFormCorrect = (errors = {}) => {
+    const errorsNumber = Object.keys(errors).length;
+    return errorsNumber === 0;
   }
 
   submitForm = () => {
     this.setState({ formSubmitted: true });
-    this.validate();
   };
 
   render() {
-    const { formData } = this.state;
+    const { formData, formSubmitted } = this.state;
     const { 
       name,
       nickname,
@@ -69,6 +71,7 @@ class Form extends PureComponent {
     } = formData;
 
     const positionFields = positions[field] || [];
+    const errors = this.validate(formData);
 
     return (
       <div className="form">
@@ -80,18 +83,24 @@ class Form extends PureComponent {
           name="name"
           handleChange={this.handleChange}
           value={name}
+          error={errors.name}
+          formSubmitted={formSubmitted}
         />
         <Input 
           label="Nickname"
           name="nickname"
           handleChange={this.handleChange}
           value={nickname}
+          error={errors.nickname}
+          formSubmitted={formSubmitted}
         />
         <Input 
           label="Email"
           name="email"
           handleChange={this.handleChange}
           value={email}
+          error={errors.email}
+          formSubmitted={formSubmitted}
         />
         <Select 
           label="Field"
@@ -99,6 +108,8 @@ class Form extends PureComponent {
           handleChange={this.handleChange}
           values={fields}
           selectedValue={field}
+          error={errors.field}
+          formSubmitted={formSubmitted}
         />
        <Select 
           label="Position"
@@ -106,6 +117,8 @@ class Form extends PureComponent {
           handleChange={this.handleChange}
           values={positionFields}
           selectedValue={position}
+          error={errors.position}
+          formSubmitted={formSubmitted}
         />
         <Button
           label="Submit"

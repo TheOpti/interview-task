@@ -1,6 +1,6 @@
 .input {
   position: relative;
-  margin: 30px 0;
+  margin: 18px 0;
   width: var(--max-form-elem-width);
   color: var(--main-dark-gray-color);
 }
@@ -57,5 +57,9 @@
   transition: 0.3s ease all;
 }
 
-
-
+.input__error-msg {
+  height: 16px;
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--main-red-color);
+}

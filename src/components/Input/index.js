@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const Input = ({ label, name, handleChange, value = '' }) => {
+const Input = ({ label, name, handleChange, value = '', error, formSubmitted }) => {
   const updateFormValue = (event) => {
     const { value } = event.target;
     handleChange(name, value);
@@ -24,6 +24,9 @@ const Input = ({ label, name, handleChange, value = '' }) => {
       >
         { label }
       </label>
+      <div className="input__error-msg">
+        { formSubmitted && error } 
+      </div>
     </div>
   );
 }
@@ -32,6 +35,8 @@ Input.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   handleChange: PropTypes.func,
+  error: PropTypes.string,
+  formSubmitted: PropTypes.bool,
 };
 
 export default Input;
