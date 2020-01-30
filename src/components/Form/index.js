@@ -10,7 +10,8 @@ import FormValueDisplay from '../FormValueDisplay';
 import {
   fields,
   positions,
-} from './form-data';
+} from '../../utils/formData';
+import { validate } from '../../utils/validation';
 
 import'./styles.css';
 
@@ -28,34 +29,6 @@ class Form extends PureComponent {
       formData: updatedForm,
     });
   };
-
-  validate = (formData) => {
-    const errors = {};
-
-    if (!formData.name) {
-      errors.name = 'This field is required';
-    }
-
-    if (!formData.nickname) {
-      errors.nickname = 'This field is required';
-    }
-
-    if (!formData.email) {
-      errors.email = 'This field is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'This is not a correct email';
-    }
-
-    if (!formData.field) {
-      errors.field = 'This field is required';
-    }
-
-    if (!formData.position) {
-      errors.position = 'This field is required';
-    }
-
-    return errors;
-  }
 
   isFormCorrect = (errors = {}) => {
     const errorsNumber = Object.keys(errors).length;
