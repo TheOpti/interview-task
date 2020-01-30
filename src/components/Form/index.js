@@ -7,10 +7,7 @@ import Button from '../Button';
 import Input from '../Input';
 import Select from '../Select';
 import FormValueDisplay from '../FormValueDisplay';
-import {
-  fields,
-  positions,
-} from '../../utils/formData';
+import { fields, positions } from '../../utils/formData';
 import { validate } from '../../utils/validation';
 
 import'./styles.css';
@@ -39,7 +36,7 @@ class Form extends PureComponent {
     this.setState({ formSubmitted: true });
     const { formData } = this.state;
 
-    const errors = this.validate(formData);
+    const errors = validate(formData);
     const formCorrect = this.isFormCorrect(errors);
 
     if (formCorrect) {
@@ -60,7 +57,7 @@ class Form extends PureComponent {
     } = formData;
 
     const positionFields = positions[field] || [];
-    const errors = this.validate(formData);
+    const errors = validate(formData);
 
     return (
       <div className="form">
