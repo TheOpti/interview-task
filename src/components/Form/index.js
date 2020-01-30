@@ -7,10 +7,7 @@ import Button from '../Button';
 import Input from '../Input';
 import Select from '../Select';
 import FormValueDisplay from '../FormValueDisplay';
-import {
-  fields,
-  positions,
-} from '../../utils/formData';
+import { formConfig } from '../../utils/formConfig';
 import { validate } from '../../utils/validation';
 
 import'./styles.css';
@@ -39,7 +36,7 @@ class Form extends PureComponent {
     this.setState({ formSubmitted: true });
     const { formData } = this.state;
 
-    const errors = this.validate(formData);
+    const errors = validate(formData);
     const formCorrect = this.isFormCorrect(errors);
 
     if (formCorrect) {
@@ -51,64 +48,35 @@ class Form extends PureComponent {
 
   render() {
     const { formData, formSubmitted } = this.state;
-    const { 
-      name,
-      nickname,
-      email,
-      field,
-      position,
-    } = formData;
-
-    const positionFields = positions[field] || [];
-    const errors = this.validate(formData);
+    const errors = validate(formData);
 
     return (
       <div className="form">
         <h1>
           Form
         </h1>
-        <Input 
-          label="Name"
-          name="name"
-          handleChange={this.handleChange}
-          value={name}
-          error={errors.name}
-          formSubmitted={formSubmitted}
-        />
-        <Input 
-          label="Nickname"
-          name="nickname"
-          handleChange={this.handleChange}
-          value={nickname}
-          error={errors.nickname}
-          formSubmitted={formSubmitted}
-        />
-        <Input 
-          label="Email"
-          name="email"
-          handleChange={this.handleChange}
-          value={email}
-          error={errors.email}
-          formSubmitted={formSubmitted}
-        />
-        <Select 
-          label="Field"
-          name="field"
-          handleChange={this.handleChange}
-          values={fields}
-          selectedValue={field}
-          error={errors.field}
-          formSubmitted={formSubmitted}
-        />
-       <Select 
-          label="Position"
-          name="position"
-          handleChange={this.handleChange}
-          values={positionFields}
-          selectedValue={position}
-          error={errors.position}
-          formSubmitted={formSubmitted}
-        />
+        {
+          formConfig.map((formElement) => {
+            const isTextElem = formElement.type === 'text';
+            const Component = isTextElem ? Input : Select;
+
+            const valueProps = isTextElem 
+              ? { value: formData[formElement.name] } 
+              : { selectedValue: formData[formElement.name], values: formElement.options };
+
+            return (
+              <Component 
+                key={formElement.name}
+                label={formElement.label}
+                name={formElement.name}
+                handleChange={this.handleChange}
+                error={errors[formElement.name]}
+                formSubmitted={formSubmitted}
+                {...valueProps}
+              />
+            )
+          })
+        }
         <Button
           label="Submit"
           onClickHandler={this.submitForm}

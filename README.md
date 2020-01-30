@@ -11,6 +11,9 @@ Bootstrap or material-design. The form should consist of 5 fields:
   * Field - required, default empty
   * Position - required, options depenent on Field value, default empty
 
+# Advanced feature
+The goal of advanced feature is to make form fully customizable via configuration file (which can be a JSON).
+
 # Scaffolding
 
 Setup for this project was created using [Create React App](https://github.com/facebook/create-react-app) project. 
